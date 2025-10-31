@@ -1,29 +1,30 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm as useRHF, FormProvider as RHFProvider } from "react-hook-form";
 import { useFormContext } from "../context/form.tsx";
 import FormLayout, { type LayoutNode } from "./FormLayout";
+import { getValidationResolver } from "../schema/validationSchema.ts";
 
 interface ReusableFormProps {
     id: string;
     layout: LayoutNode[];
+    validationResolver?: any;
 }
 
-function ReusableForm({ id, layout }: ReusableFormProps) {
+function ReusableForm({ id, layout, validationResolver }: ReusableFormProps) {
     const { formValues, setFieldValue } = useFormContext();
 
-    const {
-        handleSubmit,
-        reset,
-        formState: {  },
-    } = useForm({
+    // Initialize RHF
+    const methods = useRHF({
+        resolver: getValidationResolver(validationResolver),
         defaultValues: formValues,
         mode: "onChange",
     });
 
+    const { handleSubmit, reset } = methods;
+
     const onSubmit = (data: any) => {
-        Object.entries(data).forEach(([key, value]) => {
-            setFieldValue(key, value);
-        });
+        // Sync RHF values with custom form context
+        Object.entries(data).forEach(([key, value]) => setFieldValue(key, value));
         console.log("Form submitted:", data);
     };
 
@@ -32,13 +33,14 @@ function ReusableForm({ id, layout }: ReusableFormProps) {
     }, [formValues, reset]);
 
     return (
-        <form id={id} onSubmit={handleSubmit(onSubmit)}>
-            {layout.map((node, index) => (
-                <FormLayout key={index} layout={node} />
-            ))}
-
-            <button type="submit">Submit</button>
-        </form>
+        <RHFProvider {...methods}>
+            <form id={id} onSubmit={handleSubmit(onSubmit)}>
+                {layout.map((node, index) => (
+                    <FormLayout key={index} layout={node} />
+                ))}
+                <button type="submit">Submit</button>
+            </form>
+        </RHFProvider>
     );
 }
 

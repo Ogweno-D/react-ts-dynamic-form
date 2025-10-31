@@ -1,8 +1,8 @@
+import { FormProvider } from "../context/form.tsx";
 import ReusableForm from "./ReusableForm.tsx";
-import type {formLayoutType} from "./FormLayout.tsx";
+import type {LayoutNode} from "./FormLayout.tsx";
 
-
-type formSchema = {
+export type formSchema = {
     id: string;
     fields: Record<string, any>;
     meta: {
@@ -10,23 +10,21 @@ type formSchema = {
         subtitle?: string;
         description?: string;
     }
-    layout: formLayoutType[]
+    layout: LayoutNode[]
 }
 
 interface DynamicFormProps {
-    formSchema: formSchema
+    formSchema: formSchema;
 }
 
-function DynamicForm(props: DynamicFormProps) {
-    const formFields : any = Object.values(props.formSchema.fields)
-
+export default function DynamicForm({ formSchema }: DynamicFormProps) {
     return (
-        <div>
-            <h2>{props.formSchema.meta.title}</h2>
-            <h2>{props.formSchema.meta.subtitle} </h2>
-            <ReusableForm id={props.formSchema.id} fields={formFields} layout={props.formSchema.layout}></ReusableForm>
-        </div>
+        <FormProvider schema={formSchema}>
+            <div>
+                <h2>{formSchema.meta.title}</h2>
+                {formSchema.meta.subtitle && <h4>{formSchema.meta.subtitle}</h4>}
+                <ReusableForm id={formSchema.id} layout={formSchema.layout} />
+            </div>
+        </FormProvider>
     );
 }
-
-export default DynamicForm;

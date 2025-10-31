@@ -1,28 +1,23 @@
-import {useForm} from "react-hook-form";
-import InputFields, {type InputField} from "./InputFields.tsx";
+import InputFields from "./InputFields";
+import {useForm} from "../hooks/useForm.ts";
 
-interface FormInputProps{
-    field: InputField;
+
+interface FormInputProps {
+    fieldId: string;
 }
 
-// Can I have different fields for the form Input
-// The field received is passed is checked if it is and displayed accordingly
-// This form input should also take props
-// Text Input Fields - email, password {inputType}
-// TextArea Input Fields - rows column
-// Select - > Takes props for options
-// Checkbox
-// Radio
+export default function FormInput({ fieldId }: FormInputProps) {
+    const { schema, checkVisibility } = useForm();
+    const field = schema.fields[fieldId];
 
-function FormInput(props: FormInputProps) {
+    if (!checkVisibility(field.visibleWhen)) return null;
+
     return (
-        <div className={"form-input"}>
-            <div>
-                <label htmlFor={`${props.field.id}`}>{props.field.label}</label>
-                <InputFields field={props.field} />
-            </div>
+        <div className="form-input">
+            <label htmlFor={field.id}>
+                {field.label} {field.rules?.required && <span className="required">*</span>}
+            </label>
+            <InputFields fieldId={field.id} />
         </div>
     );
 }
-
-export default FormInput;

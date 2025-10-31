@@ -1,0 +1,163 @@
+/* ------------------------------
+   Colors
+------------------------------ */
+:root {
+    --color-lightest: #eaf1fb;
+    --color-lighter: #acccf2;
+    --color-primary: #5ca8e8;
+    --color-primary-dark: #4682B4;
+    --color-secondary: #315d83;
+    --color-dark: #1d3b55;
+    --color-darker: #0b1c2b;
+}
+
+/* ------------------------------
+   Layout Spacing
+------------------------------ */
+.form-layout--gap-sm {
+    gap: 0.5rem;
+}
+.form-layout--gap-md {
+    gap: 1rem;
+}
+.form-layout--gap-lg {
+    gap: 1.5rem;
+}
+.form-layout--gap-xl {
+    gap: 2rem;
+}
+
+/* ------------------------------
+   Stack Layout
+------------------------------ */
+.form-layout-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* ------------------------------
+   Grid Layout
+------------------------------ */
+.form-layout-grid {
+    display: grid;
+    width: 100%;
+    grid-auto-rows: minmax(40px, auto);
+    gap: 1rem;
+}
+
+/* Responsive columns */
+@media (max-width: 768px) {
+    .form-layout-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ------------------------------
+   Section Layout
+------------------------------ */
+.form-layout-section {
+    border: 1px solid var(--color-lighter);
+    border-radius: 8px;
+    background-color: var(--color-lightest);
+    overflow: hidden;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Section Header */
+.form-layout-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-weight: 600;
+}
+
+.form-layout-section-header:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Section Toggle Button */
+.form-layout-section-toggle {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Section Body */
+.form-layout-section-body {
+    padding: 1rem;
+    background-color: var(--color-lightest);
+}
+
+/* Divider */
+.form-layout-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--color-lighter);
+    margin: 0;
+}
+
+/* ------------------------------
+   Form Field (FormInput wrapper)
+------------------------------ */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-lighter);
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(92, 168, 232, 0.3);
+    outline: none;
+}
+
+/* Placeholder color */
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: var(--color-primary-dark);
+}
+
+/* ------------------------------
+   Responsive adjustments
+------------------------------ */
+@media (max-width: 1024px) {
+    .form-layout-section-body {
+        padding: 0.75rem;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-layout-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

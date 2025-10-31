@@ -1,41 +1,44 @@
-// A form has an id and input fields with validation
-import {useForm} from "react-hook-form";
-import FormInput from "./FormInput.tsx";
-import FormLayout, {type formLayoutType} from "./FormLayout.tsx";
-import type {InputField} from "./InputFields.tsx";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useFormContext } from "../context/form.tsx";
+import FormLayout, { type LayoutNode } from "./FormLayout";
 
-interface ReusableFormProps{
+interface ReusableFormProps {
     id: string;
-    fields: Record<string, any>;
-    layout: formLayoutType[]
+    layout: LayoutNode[];
 }
-function ReusableForm(props: ReusableFormProps) {
+
+function ReusableForm({ id, layout }: ReusableFormProps) {
+    const { formValues, setFieldValue } = useFormContext();
+
     const {
         handleSubmit,
-        register,
-        formState: { errors },
-    } = useForm();
+        reset,
+        formState: {  },
+    } = useForm({
+        defaultValues: formValues,
+        mode: "onChange",
+    });
 
-    const onSubmit = (data : any) => {
-        console.log(data);
-    }
+    const onSubmit = (data: any) => {
+        Object.entries(data).forEach(([key, value]) => {
+            setFieldValue(key, value);
+        });
+        console.log("Form submitted:", data);
+    };
 
-    // This is where I intend to do my layout of the form
-    // But first let me create the renderer.
-    // {console.log(props.layout)}
+    useEffect(() => {
+        reset(formValues);
+    }, [formValues, reset]);
 
     return (
-        <div>
-            <form id={`${props.id}`} onSubmit={handleSubmit(onSubmit)}>
-                {
-                    props.fields.map((field: InputField) =>
-                    (
-                        <FormInput key={field.id} field={field}/>
-                    ))
-                }
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+        <form id={id} onSubmit={handleSubmit(onSubmit)}>
+            {layout.map((node, index) => (
+                <FormLayout key={index} layout={node} />
+            ))}
+
+            <button type="submit">Submit</button>
+        </form>
     );
 }
 

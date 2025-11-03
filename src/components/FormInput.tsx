@@ -14,10 +14,8 @@ export default function FormInput({ fieldId }: FormInputProps) {
     if (!field) return null;
 
     if (!checkVisibility(field.visibleWhen)) return null;
-    // Watch the dependent field
     const passwordValue = watch("password");
 
-    // Extend rules dynamically for confirmPassword
     const rules = {
         ...field.rules,
         validate: (value: any) =>
@@ -28,14 +26,15 @@ export default function FormInput({ fieldId }: FormInputProps) {
 
     return (
         <div className="form-input">
-            <label htmlFor={field.id}>
-                {field.label} {field.rules?.required && <span className="required">*</span>}
-            </label>
+
+            {/*<label className={"form-label"} htmlFor={field.id}>*/}
+            {/*    {field.label} {field.rules?.required && <span className="field-required">*</span>}*/}
+            {/*</label>*/}
 
             <InputFields fieldId={field.id} register={register} rules={rules} />
 
             {errors[field.id] && (
-                <span className="error">{errors[field.id]?.message as string}</span>
+                <span className="input-error">{errors[field.id]?.message as string}</span>
             )}
         </div>
     );

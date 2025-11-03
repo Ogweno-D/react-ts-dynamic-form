@@ -54,7 +54,7 @@ export default function FormLayout({ layout }: FormLayoutProps) {
 
     return (
         (layout.kind === "field" && isVisible(layout) && (
-            <FormInput fieldId={layout.fieldId!} />
+            <FormInput  fieldId={layout.fieldId!} />
         )) ||
 
         (layout.kind === "stack" && (
@@ -79,7 +79,7 @@ export default function FormLayout({ layout }: FormLayoutProps) {
         )) ||
 
         (layout.kind === "section" && (
-            <div className="form-layout-ection">
+            <div className="form-layout-section">
                 {layout.title && (
                     <div
                         className="form-layout-section-header"
@@ -87,14 +87,20 @@ export default function FormLayout({ layout }: FormLayoutProps) {
                     >
                         <h3 className="form-layout-section-title">{layout.title}</h3>
                         {layout.collapsible && (
-                            <button type="button" className="form-layout-section-toggle">
-                                {collapsed ? "Expand" : "Collapse"}
+                            <button
+                                type="button"
+                                className={`form-layout-section-toggle ${collapsed ? "collapsed" : ""}`}
+                                onClick={() => setCollapsed(!collapsed)}
+                                aria-label={collapsed ? "Expand section" : "Collapse section"}
+                            >
+                                <span className="arrow"></span>
                             </button>
                         )}
+
                     </div>
                 )}
 
-                {layout.withDivider && <hr className="form-layout-divider" />}
+                {layout.withDivider && <hr className="form-layout-section-divider" />}
 
                 {!collapsed && (
                     <div

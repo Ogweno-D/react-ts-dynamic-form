@@ -22,8 +22,8 @@ export default function DynamicForm({ formSchema, validationResolver }: DynamicF
     return (
         <FormProvider schema={formSchema}>
             <div className="dynamic-form">
-                <h2>{formSchema.meta.title}</h2>
-                {formSchema.meta.subtitle && <h4>{formSchema.meta.subtitle}</h4>}
+                <h2 className={"dynamic-form-title"}>{formSchema.meta.title}</h2>
+                {formSchema.meta.subtitle && <h4 className={"dynamic-form-subtitle"}>{formSchema.meta.subtitle}</h4>}
                 <ReusableForm
                     id={formSchema.id}
                     layout={formSchema.layout}

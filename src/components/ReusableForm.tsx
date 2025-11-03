@@ -34,11 +34,16 @@ function ReusableForm({ id, layout, validationResolver }: ReusableFormProps) {
 
     return (
         <RHFProvider {...methods}>
-            <form id={id} onSubmit={handleSubmit(onSubmit)}>
+            <form className={""} id={id} onSubmit={handleSubmit(onSubmit)}>
                 {layout.map((node, index) => (
                     <FormLayout key={index} layout={node} />
                 ))}
-                <button type="submit">Submit</button>
+
+                <div className={"dynamic-form-footer"}>
+                    <button className={"dynamic-form-submit"} type="submit">Submit</button>
+                    <button className={"dynamic-form-submit"} type="reset">Clear</button>
+                </div>
+
             </form>
         </RHFProvider>
     );

@@ -1,5 +1,4 @@
 import './App.css';
-// import './styles/form.css';
 import { useState } from "react";
 import DynamicForm from "./components/DynamicForm.tsx";
 import {
@@ -27,6 +26,9 @@ function App() {
 
     return (
         <div className="app-container">
+            <div>
+                <h1> Dynamic Forms</h1>
+            </div>
             {forms.map((form, i) => (
                 <div className="form-card" key={i}>
                     <div
@@ -34,8 +36,11 @@ function App() {
                         onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
                     >
                         <h2 style={{ margin: 0 }}>{form.meta.title}</h2>
-                        <button>
-                            {expandedIndex === i ? "Collapse" : "Expand"}
+                        <button
+                            type="button"
+                            className={`form-layout-section-toggle ${expandedIndex === i ? "expanded" : "collapsed"}`}
+                        >
+                            <span className="arrow"></span>
                         </button>
                     </div>
 
@@ -47,6 +52,7 @@ function App() {
                 </div>
             ))}
         </div>
+
     );
 }
 

@@ -1,3 +1,509 @@
+/* ------------------------------
+   Colors
+------------------------------ */
+:root {
+  --color-lightest: #eaf1fb;
+  --color-lighter: #acccf2;
+  --color-primary: #5ca8e8;
+  --color-primary-dark: #4682B4;
+  --color-secondary: #315d83;
+  --color-dark: #1d3b55;
+  --color-darker: #0b1c2b;
+  --font-size: 16px;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--color-lightest);
+  color: var(--color-darker);
+  font-family: "Lexend Deca", sans-serif;
+  font-size: var(--font-size);
+}
+
+/* Center the forms and give them a card look */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  gap: 24px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.form-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  user-select: none;
+}
+
+.form-card-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.form-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Arrow toggle */
+.form-layout-section-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.arrow {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #555;
+  border-bottom: 2px solid #555;
+  transform: rotate(-45deg);
+  transition: transform 0.25s ease;
+}
+
+/* Rotate arrow down when expanded */
+.form-layout-section-toggle.expanded .arrow {
+  transform: rotate(135deg);
+}
+
+/* Keep collapsed state up */
+.form-layout-section-toggle.collapsed .arrow {
+  transform: rotate(-45deg);
+}
+
+/*Layout */
+.form-layout-section {
+  margin-bottom: 24px;
+}
+
+.form-layout-section-header {
+  margin-bottom: 16px;
+}
+
+.form-layout-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+}
+
+.form-layout-section-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.form-layout-section-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 16px 0;
+}
+
+.form-layout-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-layout-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-layout--gap-sm {
+  gap: 8px;
+}
+
+.form-layout--gap-md {
+  gap: 16px;
+}
+
+.form-layout--gap-lg {
+  gap: 24px;
+}
+
+.form-layout-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.form-layout-section-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.form-layout-section-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Arrow shape */
+.form-layout-section-toggle .arrow {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid #555;
+  border-bottom: 2px solid #555;
+  transform: rotate(-45deg);
+  transition: transform 0.25s ease;
+}
+
+/* Rotates arrow up when expanded */
+.form-layout-section-toggle.collapsed .arrow {
+  transform: rotate(135deg);
+}
+
+/* Form */
+.dynamic-form {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.dynamic-form-header {
+  margin-bottom: 32px;
+}
+
+.dynamic-form-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.dynamic-form-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.dynamic-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dynamic-form-footer {
+  margin-top: 32px;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.dynamic-form-submit {
+  background: #00838f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dynamic-form-submit:hover {
+  background: #00838f;
+}
+
+.dynamic-form-submit:active {
+  background: #00838f;
+}
+
+.form-label{
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.field-required{
+  color: #dc2626;
+  font-size: 16px;
+}
+
+.input-error{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #dc2626;
+  font-size: 13px;
+  padding: 4px 0;
+}
+
+.form-input{
+  padding: .3rem;
+}
+.form-field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  color: #374151;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+textarea:focus {
+  min-height: 120px;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button:hover{
+  appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input[type="number"]::-webkit-inner-spin-button {
+  appearance: textfield;
+}
+
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0.5rem 0;
+}
+
+.form-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #007bff; /* modern checkbox color */
+}
+
+.form-checkbox label {
+  font-size: 0.95rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.form-checkbox .input-error {
+  color: #e63946;
+  font-size: 0.85rem;
+  margin-left: 4px;
+}
+
+
+.multiselect-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 10px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.multiselect-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.multiselect-option input[type="checkbox"] {
+  accent-color: #007bff;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Hover and active states */
+.multiselect-option:hover {
+  background: #f0f8ff;
+  border-color: #007bff;
+}
+
+/* Selected state styling */
+.multiselect-option input[type="checkbox"]:checked + span,
+.multiselect-option input[type="checkbox"]:checked {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.multiselect-option {
+  border-radius: 20px;
+}
+
+.form-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0.5rem 0;
+}
+
+.radio-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.radio-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Radio option */
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.radio-option input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.radio-checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.radio-option input:checked + .radio-checkmark {
+  background-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/*File*/
+.file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input input[type="file"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  color: #6c757d;
+}
+
+.file-input:hover .file-input-label {
+  background: #e9ecef;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.file-input.has-file .file-input-label {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+.file-name {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+/* The switch*/
 .switch {
   position: relative;
   display: inline-block;
